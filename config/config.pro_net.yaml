@@ -1,0 +1,9 @@
+server:
+  url: https://hoqu-tracker-api.hoqu.io
+  port: 8090
+api:
+  endpoint: https://geth-api.hoqu.io
+  secure: true
+  auth: very-secret-key
+tracker:
+  id: 41dd637d-14cb-21e8-b954-1c1b0dfde84a

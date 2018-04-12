@@ -1,0 +1,8 @@
+server:
+  url: http://hoqu-tracker-api-test.hoqu.io
+  port: 9999
+api:
+  endpoint: http://geth-api-test.hoqu.io
+  auth: test-hash
+tracker:
+  id: 41dd637d-14cb-21e8-b954-1c1b0dfde84a

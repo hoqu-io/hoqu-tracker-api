@@ -1,0 +1,13 @@
+project:
+  name: hoqu-tracker-api
+server:
+  host: 0.0.0.0
+  port: 80
+  url: https://hoqu-tracker-api.hoqu.io
+api:
+  endpoint: https://geth-api.hoqu.io
+  secure: false
+  authHeader: X-Sign
+  auth: simple-string-by-default
+tracker:
+  id: a6fdb91a-149d-11e8-b642-0ed5f89f718b

@@ -1,0 +1,144 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "Provides all tracker-ui widgets and webmaster integrations the opportunity to manage leads through REST requests.",
+    "title": "HOQU Tracker API by GoLang.",
+    "contact": {
+      "name": "Denis Degterin",
+      "url": "https://github.com/hoqu-io/hoqu-tracker-api",
+      "email": "d.degterin@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    },
+    "version": "0.3.1"
+  },
+  "basePath": "/",
+  "paths": {
+    "/widget/submit": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "widgets"
+        ],
+        "summary": "Submit widget. Create Lead on success and push it to the blockchain.",
+        "operationId": "submitWidget",
+        "parameters": [
+          {
+            "x-go-name": "Body",
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SubmitWidgetRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/responses/RestErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SubmitWidgetRequest": {
+      "type": "object",
+      "properties": {
+        "adId": {
+          "description": "the ID of an Ad the widget was created for",
+          "type": "string",
+          "x-go-name": "AdId",
+          "example": "a6fdb91a-149d-11e8-b642-0ed5f89f718b"
+        },
+        "meta": {
+          "description": "Widget meta data in JSON",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "x-go-name": "Meta",
+          "example": "{\"country\": \"DE\", \"ip\": \"123.44.55.66\"}"
+        }
+      },
+      "x-go-package": "hoqu-tracker-api/models"
+    }
+  },
+  "responses": {
+    "RestErrorResponse": {
+      "description": "Error",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "description": "error code",
+                "type": "string",
+                "x-go-name": "Code",
+                "example": "VALIDATION_ERROR"
+              },
+              "message": {
+                "description": "error description",
+                "type": "string",
+                "x-go-name": "Message",
+                "example": "id should be in UUID format"
+              }
+            },
+            "x-go-name": "Error"
+          }
+        }
+      }
+    },
+    "SuccessResponse": {
+      "description": "Success",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "success": {
+                "type": "boolean",
+                "x-go-name": "Success"
+              }
+            },
+            "x-go-name": "Data"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "hash": {
+      "type": "apiKey",
+      "name": "X-Sign",
+      "in": "header"
+    },
+    "jwt": {
+      "type": "apiKey",
+      "name": "X-Authorization",
+      "in": "header"
+    }
+  }
+}
